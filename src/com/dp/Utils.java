@@ -1,0 +1,78 @@
+package com.dp;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Utils {
+	
+	public static void sleep(int seconds) {
+		try {
+			Thread.sleep(seconds * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createFolder(String name) {
+		new File(name).mkdirs();
+	}
+	
+	public static void writeInfo(String path, String fileName, String appName, String author, String des, String updateTime, String version, String hearts) {
+		try{
+		    PrintWriter writer = new PrintWriter(path + "/" + fileName + ".txt", "UTF-8");
+		    writer.println("App name: " + appName);
+		    writer.println("Author: " + author);
+		    writer.println("Description: " + des);
+		    writer.println("Updated: " + updateTime);
+		    writer.println("Version: " + version);
+		    writer.println("Hearts: " + hearts);
+		    writer.close();
+		} catch (IOException e) {
+		   // do something
+		}
+	}
+	
+	public static boolean isDownloadCompeleted() {
+		String downloadsPath = System.getProperty("user.home") + "/Downloads";
+		long startTime = System.currentTimeMillis();
+		
+		while (System.currentTimeMillis() - startTime < 60000) {
+			if(getLatestFile(downloadsPath).getName().endsWith(".pbw")) {
+				return true;
+			}
+			sleep(2);
+		}
+		return false;
+	}
+	
+	public static void checkDownload() {
+		String downloadsPath = System.getProperty("user.home") + "/Downloads";
+		long startTime = System.currentTimeMillis();
+		
+		while (System.currentTimeMillis() - startTime < 60000) {
+			if(getLatestFile(downloadsPath).getName().endsWith(".pbw")) {
+				break;
+			} else {
+				sleep(2);
+			}
+		}
+	}
+	
+	public static File getLatestFile(String path) {
+		File dir = new File(path);
+	    File[] files = dir.listFiles();
+	    if (files == null || files.length == 0) {
+	        return null;
+	    }
+	    
+	    File lastModifiedFile = files[0];
+	    for (int i = 1; i < files.length; i++) {
+	       if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+	           lastModifiedFile = files[i];
+	       }
+	    }
+	    return lastModifiedFile;
+
+	}
+}
