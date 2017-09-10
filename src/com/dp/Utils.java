@@ -2,7 +2,13 @@ package com.dp;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.apache.commons.io.FileUtils;
 
 public class Utils {
 	
@@ -51,10 +57,28 @@ public class Utils {
 		long startTime = System.currentTimeMillis();
 		
 		while (System.currentTimeMillis() - startTime < 60000) {
-			if(getLatestFile(downloadsPath).getName().endsWith(".pbw")) {
-				break;
-			} else {
-				sleep(2);
+			File file = getLatestFile(downloadsPath);
+			if(file != null) {
+				if(file.getName().endsWith(".pbw")) {
+					break;
+				} else {
+					sleep(2);
+				}
+			}
+		}
+	}
+	
+	public static void checkDownload(String downloadPath) {
+		long startTime = System.currentTimeMillis();
+		
+		while (System.currentTimeMillis() - startTime < 60000) {
+			File file = getLatestFile(downloadPath);
+			if(file != null) {
+				if(!file.getName().endsWith("crdownload")) {
+					break;
+				} else {
+					sleep(2);
+				}
 			}
 		}
 	}
@@ -73,6 +97,25 @@ public class Utils {
 	       }
 	    }
 	    return lastModifiedFile;
-
 	}
+	
+	public static void saveImage(String url, String path) {
+		try {
+			InputStream inputStream = new URL(url).openStream();
+			Files.copy(inputStream, Paths.get(path));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void downloadImage(String url, String path) {
+		try {
+			FileUtils.copyURLToFile(new URL(url), new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

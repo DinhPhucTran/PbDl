@@ -1,36 +1,27 @@
 package com.dp;
 
-import java.awt.AWTException;
-import java.awt.RenderingHints.Key;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
-import org.apache.bcel.generic.NEW;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Sleeper;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.File;
+import java.util.Date;
 
 public class PbDlMain {
 	
-	public static void main(String[] args) throws AWTException {
+	public static void main(String[] args) {
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		
+		//page max: 287
 		FaceDownloader faceDownloader = new FaceDownloader();
-		faceDownloader.download("aplite", 1);
-		
-		
-		
+		/*for(int i = 7; i <= 20; i++) {
+			faceDownloader.download("aplite", i);
+			if((new File("Faces/" + i).list().length < 39)) {
+				System.out.println("Page " + i + " has less than 39 faces!");
+				Utils.createFolder("Faces/Error_" + i);
+			}
+		}*/
+		//faceDownloader.close();
+		System.out.println("Start: " + (new Date()));
+		faceDownloader.download("aplite", 20);
+		faceDownloader.close();
+		System.out.println("Download complete: " + (new Date()));
 	}
 	
 }
