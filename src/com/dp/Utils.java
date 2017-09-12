@@ -39,6 +39,24 @@ public class Utils {
 		}
 	}
 	
+	public static void writeAppInfo(String path, String fileName, String appName, String author, String category, String des, String updateTime, String version, String hearts, boolean appRequired) {
+		try{
+		    PrintWriter writer = new PrintWriter(path + "/" + fileName + ".txt", "UTF-8");
+		    writer.println("App name: " + appName);
+		    writer.println("Author: " + author);
+		    writer.println("Category: " + category);
+		    writer.println("Description: " + des);
+		    writer.println("Updated: " + updateTime);
+		    writer.println("Version: " + version);
+		    writer.println("Hearts: " + hearts);
+		    if(appRequired) {
+		    	writer.println("Companion app required.");
+		    }
+		    writer.close();
+		} catch (IOException e) {
+		}
+	}
+	
 	public static boolean isDownloadCompeleted() {
 		String downloadsPath = System.getProperty("user.home") + "/Downloads";
 		long startTime = System.currentTimeMillis();

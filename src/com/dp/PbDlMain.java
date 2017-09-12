@@ -1,6 +1,5 @@
 package com.dp;
 
-import java.io.File;
 import java.util.Date;
 
 public class PbDlMain {
@@ -9,7 +8,7 @@ public class PbDlMain {
 		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 		
 		//page max: 287
-		FaceDownloader faceDownloader = new FaceDownloader();
+		//FaceDownloader faceDownloader = new FaceDownloader();
 		/*for(int i = 7; i <= 20; i++) {
 			faceDownloader.download("aplite", i);
 			if((new File("Faces/" + i).list().length < 39)) {
@@ -18,9 +17,16 @@ public class PbDlMain {
 			}
 		}*/
 		//faceDownloader.close();
-		System.out.println("Start: " + (new Date()));
+		
+		/*System.out.println("Start: " + (new Date()));
 		faceDownloader.download("aplite", 20);
 		faceDownloader.close();
+		System.out.println("Download complete: " + (new Date()));*/
+		
+		AppDownloader appDownloader = new AppDownloader();
+		System.out.println("Start: " + (new Date()));
+		appDownloader.download("aplite", 1);
+		appDownloader.close();
 		System.out.println("Download complete: " + (new Date()));
 	}
 	
