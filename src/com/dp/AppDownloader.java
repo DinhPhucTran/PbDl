@@ -136,7 +136,7 @@ public class AppDownloader {
 					appRequired = false;
 				}
 				
-				path = "Apps/" + page + "/" + name;
+				path = "D:/PbApps/" + page + "/" + name;
 				Utils.createFolder(path);
 				Utils.writeAppInfo(path, name, oriName, author, category, description, updated, version, hearts, appRequired);
 				Utils.downloadImage(img, path + "/" + name + ".gif");

@@ -25,7 +25,7 @@ public class PbDlMain {
 		
 		AppDownloader appDownloader = new AppDownloader();
 		System.out.println("Start: " + (new Date()));
-		appDownloader.download("aplite", 1);
+		appDownloader.download("aplite", 10);
 		appDownloader.close();
 		System.out.println("Download complete: " + (new Date()));
 	}

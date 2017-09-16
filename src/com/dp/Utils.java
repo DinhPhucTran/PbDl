@@ -88,17 +88,23 @@ public class Utils {
 	
 	public static void checkDownload(String downloadPath) {
 		long startTime = System.currentTimeMillis();
-		
-		while (System.currentTimeMillis() - startTime < 60000) {
+		System.out.print("---------");
+		long t = 0;
+		while (System.currentTimeMillis() - startTime < 120000) {
 			File file = getLatestFile(downloadPath);
 			if(file != null) {
 				if(!file.getName().endsWith("crdownload")) {
 					break;
 				} else {
-					sleep(2);
+					t = (System.currentTimeMillis() - startTime) / 1000;
+					System.out.print(" " + t);
+					sleep(1);
 				}
+			} else {
+				sleep(1);
 			}
 		}
+		System.out.println("");
 	}
 	
 	public static File getLatestFile(String path) {
